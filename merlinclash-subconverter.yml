@@ -1,0 +1,549 @@
+# TaoXing V7 SubConverter remote external configuration.
+# Use this URL in Merlin Clash V7: SubConverter local conversion -> Remote configuration.
+# This is a SubConverter configuration, not a standalone Clash configuration.
+version: 1
+common:
+  api_mode: false
+  default_url: []
+  enable_insert: false
+  insert_url: []
+  prepend_insert_url: false
+  exclude_remarks: ["(到期|剩余流量|时间|官网|产品|平台)"]
+  include_remarks: []
+  enable_filter: false
+  base_path: base
+  clash_rule_base: "https://raw.githubusercontent.com/boji6681/subconverter/master/merlinclash-clash-base.yml"
+  proxy_config: SYSTEM
+  proxy_ruleset: SYSTEM
+  proxy_subscription: SYSTEM
+  append_proxy_type: false
+node_pref:
+  udp_flag: true
+  tcp_fast_open_flag: true
+  skip_cert_verify_flag: true
+  tls13_flag: false
+  sort_flag: true
+  filter_deprecated_nodes: false
+  append_sub_userinfo: true
+  clash_use_new_field_name: true
+  clash_proxies_style: flow
+rulesets:
+  enabled: true
+  overwrite_original_rules: true
+  update_ruleset_on_request: false
+  rulesets:    - rule: "IP-CIDR,23.237.231.61/32,no-resolve"`n      group: "DIRECT"
+    - rule: "IP-CIDR,23.237.231.63/32,no-resolve"`n      group: "DIRECT"
+    - rule: "IP-CIDR,23.237.231.64/32,no-resolve"`n      group: "DIRECT"
+    - rule: "IP-CIDR,23.237.231.73/32,no-resolve"`n      group: "DIRECT"
+    - rule: "IP-CIDR,23.237.231.74/32,no-resolve"`n      group: "DIRECT"
+    - rule: "IP-CIDR,23.237.231.72/32,no-resolve"`n      group: "DIRECT"
+    - rule: "IP-CIDR,23.237.231.71/32,no-resolve"`n      group: "DIRECT"
+    - rule: "IP-CIDR,64.62.198.69/32,no-resolve"`n      group: "DIRECT"
+    - rule: "IP-CIDR,64.62.198.66/32,no-resolve"`n      group: "DIRECT"
+    - rule: "IP-CIDR,64.62.198.119/32,no-resolve"`n      group: "DIRECT"
+    - rule: "IP-CIDR,64.62.198.109/32,no-resolve"`n      group: "DIRECT"
+    - rule: "IP-CIDR,64.62.198.101/32,no-resolve"`n      group: "DIRECT"
+    - rule: "IP-CIDR,64.62.198.102/32,no-resolve"`n      group: "DIRECT"
+    - rule: "IP-CIDR,42.200.223.79/32,no-resolve"`n      group: "DIRECT"
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list"`n      group: "DIRECT"`n      interval: 86400
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list"`n      group: "DIRECT"`n      interval: 86400
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list"`n      group: "REJECT"`n      interval: 86400
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list"`n      group: "REJECT"`n      interval: 86400
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list"`n      group: "🤖AI服务"`n      interval: 86400
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Claude.list"`n      group: "🤖AI服务"`n      interval: 86400
+    - rule: "DOMAIN-SUFFIX,chat.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,oaistatic.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,oaistatsig.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,oaiusercontent.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,sora.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,chatgpt.livekit.cloud"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,claude.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,clau.de"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,claudeusercontent.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN,gemini.google.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,gemini.google"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,gemini.gstatic.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN,ai.google"`n      group: "🤖AI服务"
+    - rule: "DOMAIN,ai.google.dev"`n      group: "🤖AI服务"
+    - rule: "DOMAIN,aistudio.google.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,generativeai.google"`n      group: "🤖AI服务"
+    - rule: "DOMAIN,generativelanguage.googleapis.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,deepmind.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,deepmind.google"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,llama.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,meta.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,x.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,grok.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,copilot.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,copilot.microsoft"`n      group: "🤖AI服务"
+    - rule: "DOMAIN,copilot.microsoft.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,githubcopilot.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN,copilot-proxy.githubusercontent.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,perplexity.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,perplexity.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,pplx.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,midjourney.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,midjourneycdn.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,runwayml.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,pika.art"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,stability.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,stable.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,dreamstudio.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,elevenlabs.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,elevenlabs.io"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,suno.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,suno.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,udio.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,character.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,replit.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,cursor-cdn.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,cursor.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,cursor.sh"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,cursorapi.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,cognition.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,devin.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,poe.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,poecdn.net"`n      group: "🤖AI服务"
+    - rule: "DOMAIN,aws.amazon.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-KEYWORD,bedrock-runtime"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-KEYWORD,amazonq"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,watsonx.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN,dataplatform.cloud.ibm.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,mistral.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,synthesia.io"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,cohere.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,cohere.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,aleph-alpha.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,sakana.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,preferred.jp"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,aipicasso.app"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,clova.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,clovastudio.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,skt.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,wrtn.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,wrtnlabs.io"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,krutrim.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,olakrutrim.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,sarvam.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,ai21.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,ai21labs.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,tii.ae"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,apertus.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,apertus-ai.org"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,publicai.ch"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,giga.chat"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,developers.sber.ru"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,gigachat.devices.sberbank.ru"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,yandexcloud.net"`n      group: "🤖AI服务"
+    - rule: "DOMAIN,llm.api.cloud.yandex.net"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,keboola.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,huggingface.co"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,hf.co"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,hf.space"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,ollama.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,lmstudio.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,together.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,replicate.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,replicate.delivery"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,groq.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,fireworks.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,jasper.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,copy.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,heygen.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,upstage.ai"`n      group: "🤖AI服务"
+    - rule: "DOMAIN,github.com"`n      group: "🤖AI服务"
+    - rule: "DOMAIN-SUFFIX,youtube.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,youtube-nocookie.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,youtu.be"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,googlevideo.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,ytimg.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,ggpht.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,netflix.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,netflix.net"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,nflxvideo.net"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,nflximg.net"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,nflxso.net"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,nflxext.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,primevideo.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,amazonvideo.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,aiv-cdn.net"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,disneyplus.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,disney-plus.net"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,bamgrid.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,hulu.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,huluim.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,max.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,hbomax.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,warnermediacdn.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,paramountplus.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,peacocktv.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN,tv.apple.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,twitch.tv"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,ttvnw.net"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,jtvnw.net"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,vimeo.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,vimeocdn.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,dailymotion.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,dmcdn.net"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,kick.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,rumble.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,bigo.tv"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,sooplive.co.kr"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,sooplive.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,afreecatv.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,afreecatv.co.kr"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,naver.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,kakao.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,wavve.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,tving.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,nicovideo.jp"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,nimg.jp"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,abema.tv"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,unext.jp"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,hulu.jp"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,tver.jp"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,bbc.co.uk"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,bbc.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,itv.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,dazn.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,rtl.de"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,joyn.de"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,geforcenow.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN,luna.amazon.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,plex.tv"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,jellyfin.org"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,emby.media"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,crunchyroll.com"`n      group: "🎬国外流媒体"
+    - rule: "DOMAIN-SUFFIX,funimation.com"`n      group: "🎬国外流媒体"
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list"`n      group: "📱国外社交软件"`n      interval: 86400
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Facebook.list"`n      group: "📱国外社交软件"`n      interval: 86400
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Instagram.list"`n      group: "📱国外社交软件"`n      interval: 86400
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Twitter.list"`n      group: "📱国外社交软件"`n      interval: 86400
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Whatsapp.list"`n      group: "📱国外社交软件"`n      interval: 86400
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Discord.list"`n      group: "📱国外社交软件"`n      interval: 86400
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Reddit.list"`n      group: "📱国外社交软件"`n      interval: 86400
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/TikTok.list"`n      group: "📱国外社交软件"`n      interval: 86400
+    - rule: "DOMAIN-SUFFIX,linkedin.com"`n      group: "📱国外社交软件"
+    - rule: "DOMAIN-SUFFIX,licdn.com"`n      group: "📱国外社交软件"
+    - rule: "DOMAIN-SUFFIX,facebook.com"`n      group: "📱国外社交软件"
+    - rule: "DOMAIN-SUFFIX,fbcdn.net"`n      group: "📱国外社交软件"
+    - rule: "DOMAIN-SUFFIX,instagram.com"`n      group: "📱国外社交软件"
+    - rule: "DOMAIN-SUFFIX,cdninstagram.com"`n      group: "📱国外社交软件"
+    - rule: "DOMAIN-SUFFIX,tiktok.com"`n      group: "📱国外社交软件"
+    - rule: "DOMAIN-SUFFIX,tiktokcdn.com"`n      group: "📱国外社交软件"
+    - rule: "DOMAIN-SUFFIX,byteoversea.com"`n      group: "📱国外社交软件"
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Other/Games.list"`n      group: "🎮国外游戏平台"`n      interval: 86400
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Steam.list"`n      group: "🎮国外游戏平台"`n      interval: 86400
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Epic.list"`n      group: "🎮国外游戏平台"`n      interval: 86400
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Origin.list"`n      group: "🎮国外游戏平台"`n      interval: 86400
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Nintendo.list"`n      group: "🎮国外游戏平台"`n      interval: 86400
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Xbox.list"`n      group: "🎮国外游戏平台"`n      interval: 86400
+    - rule: "DOMAIN-SUFFIX,steampowered.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,steamcommunity.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,epicgames.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,rockstargames.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,nintendo.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN,apps.microsoft.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,battle.net"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,riotgames.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,roblox.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,amazongames.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,itch.io"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,sega.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,square-enix-games.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,nexon.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,netmarble.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,kakaogames.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,smilegate.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,ubisoftconnect.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,gog.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,cdprojekt.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,giants-software.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,xbox.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,xboxlive.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,playstation.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,steamdb.info"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,steamcharts.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,igdb.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,gamespot.com"`n      group: "🎮国外游戏平台"
+    - rule: "DOMAIN-SUFFIX,ign.com"`n      group: "🎮国外游戏平台"
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Google.list"`n      group: "🌐Google服务"`n      interval: 86400
+    - rule: "DOMAIN-SUFFIX,google.com"`n      group: "🌐Google服务"
+    - rule: "DOMAIN-SUFFIX,googleapis.com"`n      group: "🌐Google服务"
+    - rule: "DOMAIN-SUFFIX,gstatic.com"`n      group: "🌐Google服务"
+    - rule: "DOMAIN-SUFFIX,googleusercontent.com"`n      group: "🌐Google服务"
+    - rule: "DOMAIN-SUFFIX,ggpht.com"`n      group: "🌐Google服务"
+    - rule: "DOMAIN-SUFFIX,googleadservices.com"`n      group: "🌐Google服务"
+    - rule: "DOMAIN-SUFFIX,googlesyndication.com"`n      group: "🌐Google服务"
+    - rule: "DOMAIN-SUFFIX,google-analytics.com"`n      group: "🌐Google服务"
+    - rule: "DOMAIN-SUFFIX,googleapis.cn"`n      group: "🌐Google服务"
+    - rule: "DOMAIN,mail.icloud.com"`n      group: "🚀主要代理"
+    - rule: "DOMAIN,imap.mail.me.com"`n      group: "🚀主要代理"
+    - rule: "DOMAIN,smtp.mail.me.com"`n      group: "🚀主要代理"
+    - rule: "DOMAIN-SUFFIX,mail.me.com"`n      group: "🚀主要代理"
+    - rule: "DOMAIN,maps.apple.com"`n      group: "🚀主要代理"
+    - rule: "DOMAIN,maps.apple.com.cn"`n      group: "🚀主要代理"
+    - rule: "DOMAIN-SUFFIX,apple-mapkit.com"`n      group: "🚀主要代理"
+    - rule: "DOMAIN-SUFFIX,ls.apple.com"`n      group: "🚀主要代理"
+    - rule: "DOMAIN-SUFFIX,aaplimg.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,apple-cloudkit.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,apple-livephotoskit.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,apple-dns.net"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,apple.co"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,apple.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,apple.com.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,apple.news"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,appstore.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,apzones.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,cdn-apple.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,icloud.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,icloud.com.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,icloud-content.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,itunes.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,me.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,mzstatic.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,networking.apple"`n      group: "DIRECT"
+    - rule: "DOMAIN,apple-relay.cloudflare.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,apple-relay.fastly-edge.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,cp4.cloudflare.com"`n      group: "DIRECT"
+    - rule: "IP-CIDR,17.0.0.0/8,no-resolve"`n      group: "DIRECT"
+    - rule: "IP-CIDR6,2403:300::/32,no-resolve"`n      group: "DIRECT"
+    - rule: "IP-CIDR6,2620:149::/32,no-resolve"`n      group: "DIRECT"
+    - rule: "IP-CIDR6,2a01:b740::/32,no-resolve"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,qq.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,gtimg.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,iqiyi.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,iq.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,youku.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,bilibili.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,bilivideo.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,mgtv.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,sohu.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,ixigua.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,douyin.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,douyinvod.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,kuaishou.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,miguvideo.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,cntv.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,cctv.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,douyu.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,huya.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,yy.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,cc.163.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,inke.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,huajiao.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,cg.163.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,migufun.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,shunwang.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,taobao.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,tmall.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,1688.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,alicdn.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,alipay.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,alipayobjects.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,goofish.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,jd.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,jdcloud.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,jdpay.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,jd.hk"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,pinduoduo.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,yangkeduo.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,vip.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,suning.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,dewu.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,poizon.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,xiaohongshu.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,xhscdn.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,meituan.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,meituan.net"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,dianping.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,ele.me"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,ctrip.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,qunar.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,fliggy.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,linkedin.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,wegame.com.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN,game.qq.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,start.qq.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,cloudgame.qq.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,game.163.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,u.163.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,steamchina.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,wanmei.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,pwesports.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,cubejoy.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,xiaoheihe.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,taptap.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,3839.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,9game.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,4399.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,17173.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,ali213.net"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,3dmgame.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,sj.qq.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,game.huawei.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,game.xiaomi.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,store.oppomobile.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,game.vivo.com.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,gamersky.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,deepseek.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,qianwen.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,qwen.ai"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,qwenlm.ai"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,tongyi.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,qianwen.aliyun.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,tongyi.aliyun.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,kimi.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,moonshot.ai"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,moonshot.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,bigmodel.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,chatglm.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,z.ai"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,zhipuai.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,zhipucn.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,minimaxi.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,hailuoai.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,xingyeai.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,stepfun.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,stepfun.ai"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,doubao.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,doubaocdn.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,coze.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,coze.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,cozecdn.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,pixeldance.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,jimeng.jianying.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,yiyan.baidu.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,wenxin.baidu.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,ernie.baidu.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,yuanbao.tencent.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,hunyuan.tencent.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,pangu.huaweicloud.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,xinghuo.xfyun.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,sensechat.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,sensenova.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,sensetime.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,baichuan-ai.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,01.ai"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,lingyiwanwu.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,intern-ai.org.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,internlm.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,tiangong.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN,taichu-web.ia.ac.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,wudaoai.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,baai.ac.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,kechuangai.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,kling-ai.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,klingai.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,qwen.aliyun.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,bailian.aliyun.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,cloud.baidu.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,cloud.tencent.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,volcengine.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,ai.360.cn"`n      group: "DIRECT"
+    - rule: "DOMAIN,fuxi.163.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,mimo.xiaomi.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,www.huaweicloud.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,yanxi.jd.com"`n      group: "DIRECT"
+    - rule: "DOMAIN,www.oppo.com"`n      group: "DIRECT"
+    - rule: "DOMAIN-SUFFIX,modelscope.cn"`n      group: "DIRECT"
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list"`n      group: "DIRECT"`n      interval: 86400
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list"`n      group: "DIRECT"`n      interval: 86400
+    - rule: "GEOIP,CN"`n      group: "DIRECT"
+    - ruleset: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyLite.list"`n      group: "🚀主要代理"`n      interval: 86400
+    - rule: "MATCH"`n      group: "🚀主要代理"
+
+proxy_groups:
+  custom_proxy_group:
+    - name: "🚀主要代理"
+      type: select
+      rule: ["[]♻️自动选择", "[]🔯故障转移", "[]🇺🇸 美国地区", "[]🇸🇬 新加坡地区", "[]🇹🇼 台湾地区", "[]🇭🇰 香港地区", "[]🇯🇵 日本地区", "[]🇰🇷 韩国地区", "[]🌍 其他地区"]
+    - name: "♻️自动选择"
+      type: url-test
+      rule: ["[]♻️ 美国自动选择", "[]♻️ 新加坡自动选择", "[]♻️ 台湾自动选择", "[]♻️ 香港自动选择", "[]♻️ 日本自动选择", "[]♻️ 韩国自动选择", "[]♻️ 其他地区自动选择"]
+      url: "https://www.gstatic.com/generate_204"
+      interval: 300
+      tolerance: 50
+    - name: "🤖AI服务"
+      type: select
+      rule: ["[]🇺🇸 美国地区", "[]🇸🇬 新加坡地区", "[]🇹🇼 台湾地区", "[]🇯🇵 日本地区", "[]🇰🇷 韩国地区"]
+    - name: "🎬国外流媒体"
+      type: select
+      rule: ["[]🇸🇬 新加坡地区", "[]🇺🇸 美国地区", "[]🇹🇼 台湾地区", "[]🇭🇰 香港地区", "[]🇯🇵 日本地区", "[]🇰🇷 韩国地区"]
+    - name: "📱国外社交软件"
+      type: select
+      rule: ["[]🇺🇸 美国地区", "[]🇸🇬 新加坡地区", "[]🇹🇼 台湾地区", "[]🇭🇰 香港地区", "[]🇯🇵 日本地区", "[]🇰🇷 韩国地区"]
+    - name: "🎮国外游戏平台"
+      type: select
+      rule: ["[]🇭🇰 香港地区", "[]🇹🇼 台湾地区", "[]🇯🇵 日本地区", "[]🇰🇷 韩国地区", "[]🇸🇬 新加坡地区", "[]🇺🇸 美国地区"]
+    - name: "🌐Google服务"
+      type: select
+      rule: ["[]🇺🇸 美国地区", "[]🇸🇬 新加坡地区", "[]🇹🇼 台湾地区", "[]🇭🇰 香港地区", "[]🇯🇵 日本地区", "[]🇰🇷 韩国地区"]
+    - name: "🔯故障转移"
+      type: fallback
+      rule: ["[]♻️ 美国自动选择", "[]♻️ 新加坡自动选择", "[]♻️ 台湾自动选择", "[]♻️ 日本自动选择", "[]♻️ 韩国自动选择", "[]♻️ 香港自动选择", "[]♻️ 其他地区自动选择"]
+      url: "https://www.gstatic.com/generate_204"
+      interval: 180
+    - name: "🇺🇸 "
+      type: select
+      rule: ["[]♻️ ", "(?i)(🇺🇸|美国|美國|United States|(^|[^A-Za-z])US([^A-Za-z]|$)|USA|洛杉矶|洛杉磯|圣何塞|聖何塞|西雅图|西雅圖|纽约|紐約|达拉斯|達拉斯)"]
+    - name: "♻️ "
+      type: url-test
+      rule: ["(?i)(🇺🇸|美国|美國|United States|(^|[^A-Za-z])US([^A-Za-z]|$)|USA|洛杉矶|洛杉磯|圣何塞|聖何塞|西雅图|西雅圖|纽约|紐約|达拉斯|達拉斯)"]
+      url: "https://www.gstatic.com/generate_204"
+      interval: 300
+      tolerance: 50
+    - name: "🇸🇬 "
+      type: select
+      rule: ["[]♻️ ", "(?i)(🇸🇬|新加坡|Singapore|(^|[^A-Za-z])SG([^A-Za-z]|$))"]
+    - name: "♻️ "
+      type: url-test
+      rule: ["(?i)(🇸🇬|新加坡|Singapore|(^|[^A-Za-z])SG([^A-Za-z]|$))"]
+      url: "https://www.gstatic.com/generate_204"
+      interval: 300
+      tolerance: 50
+    - name: "🇹🇼 "
+      type: select
+      rule: ["[]♻️ ", "(?i)(🇹🇼|台湾|台灣|Taiwan|(^|[^A-Za-z])TW([^A-Za-z]|$))"]
+    - name: "♻️ "
+      type: url-test
+      rule: ["(?i)(🇹🇼|台湾|台灣|Taiwan|(^|[^A-Za-z])TW([^A-Za-z]|$))"]
+      url: "https://www.gstatic.com/generate_204"
+      interval: 300
+      tolerance: 50
+    - name: "🇭🇰 "
+      type: select
+      rule: ["[]♻️ ", "(?i)(🇭🇰|香港|Hong Kong|HongKong|(^|[^A-Za-z])HK([^A-Za-z]|$))"]
+    - name: "♻️ "
+      type: url-test
+      rule: ["(?i)(🇭🇰|香港|Hong Kong|HongKong|(^|[^A-Za-z])HK([^A-Za-z]|$))"]
+      url: "https://www.gstatic.com/generate_204"
+      interval: 300
+      tolerance: 50
+    - name: "🇯🇵 "
+      type: select
+      rule: ["[]♻️ ", "(?i)(🇯🇵|日本|Japan|Tokyo|东京|東京|Osaka|大阪|(^|[^A-Za-z])JP([^A-Za-z]|$))"]
+    - name: "♻️ "
+      type: url-test
+      rule: ["(?i)(🇯🇵|日本|Japan|Tokyo|东京|東京|Osaka|大阪|(^|[^A-Za-z])JP([^A-Za-z]|$))"]
+      url: "https://www.gstatic.com/generate_204"
+      interval: 300
+      tolerance: 50
+    - name: "🇰🇷 "
+      type: select
+      rule: ["[]♻️ ", "(?i)(🇰🇷|韩国|韓國|South Korea|Korea|Seoul|首尔|首爾|(^|[^A-Za-z])KR([^A-Za-z]|$))"]
+    - name: "♻️ "
+      type: url-test
+      rule: ["(?i)(🇰🇷|韩国|韓國|South Korea|Korea|Seoul|首尔|首爾|(^|[^A-Za-z])KR([^A-Za-z]|$))"]
+      url: "https://www.gstatic.com/generate_204"
+      interval: 300
+      tolerance: 50
+    - name: "🌍 其他地区"
+      type: select
+      rule: ["[]♻️ 其他地区自动选择", ".*"]
+    - name: "♻️ 其他地区自动选择"
+      type: url-test
+      rule: [".*"]
+      url: "https://www.gstatic.com/generate_204"
+      interval: 300
+      tolerance: 50
