@@ -12,7 +12,7 @@ common:
   include_remarks: []
   enable_filter: false
   base_path: base
-  clash_rule_base: "https://raw.githubusercontent.com/boji6681/subconverter/master/merlinclash-clash-base.yml"
+  clash_rule_base: "https://raw.githubusercontent.com/boji6681/subconverter/main/merlinclash-clash-base.yml"
   proxy_config: SYSTEM
   proxy_ruleset: SYSTEM
   proxy_subscription: SYSTEM
