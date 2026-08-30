@@ -10,7 +10,25 @@ common:
   prepend_insert_url: false
   exclude_remarks: ["(到期|剩余流量|时间|官网|产品|平台)"]
   include_remarks: []
-  enable_filter: false
+  enable_filter: true
+  # Keep only protocols supported by this MerlinClash build.
+  # Unknown or malformed nodes are rejected to keep Mihomo startup-safe.
+  filter_script: |
+    function filter(node) {
+      try {
+        const info = JSON.parse(node.ProxyInfo || "{}");
+        const type = String(
+          info.Type || info.type || info.Protocol || info.protocol || ""
+        ).toLowerCase();
+        return [
+          "ss", "shadowsocks",
+          "ssr", "shadowsocksr",
+          "vmess", "vless", "trojan"
+        ].includes(type);
+      } catch (e) {
+        return false;
+      }
+    }
   base_path: base
   clash_rule_base: "https://raw.githubusercontent.com/boji6681/subconverter/main/merlinclash-clash-base.yml"
   proxy_config: SYSTEM
@@ -23,7 +41,7 @@ node_pref:
   skip_cert_verify_flag: true
   tls13_flag: false
   sort_flag: true
-  filter_deprecated_nodes: false
+  filter_deprecated_nodes: true
   append_sub_userinfo: true
   clash_use_new_field_name: true
   clash_proxies_style: flow
