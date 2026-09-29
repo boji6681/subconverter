@@ -1,0 +1,299 @@
+mixed-port: 7890
+allow-lan: false
+bind-address: 127.0.0.1
+mode: rule
+log-level: warning
+ipv6: true
+unified-delay: true
+profile:
+  store-selected: true
+dns:
+  enable: true
+  listen: 127.0.0.1:1053
+  ipv6: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+  - "*.lan"
+  - "*.local"
+  - localhost
+  default-nameserver:
+  - https://223.5.5.5/dns-query
+  - https://1.12.12.12/dns-query
+  proxy-server-nameserver:
+  - https://223.5.5.5/dns-query
+  - https://1.12.12.12/dns-query
+  nameserver:
+  - https://1.1.1.1/dns-query#淘星网 TaoXingWang
+  fallback: []
+  nameserver-policy:
+    +.cn:
+    - https://223.5.5.5/dns-query
+    +.qq.com:
+    - https://223.5.5.5/dns-query
+    +.taobao.com:
+    - https://223.5.5.5/dns-query
+  respect-rules: true
+  direct-nameserver:
+  - https://223.5.5.5/dns-query
+tun:
+  enable: false
+  stack: mixed
+  auto-route: true
+  auto-detect-interface: true
+  dns-hijack:
+  - any:53
+  - tcp://any:53
+x-orbit:
+  version: 2
+  upstream-groups:
+    name-format: "{source}"
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    lazy: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Ox.png
+    member-selector: source
+    sort: source-order
+    empty: reject
+proxies: {{PROXIES}}
+proxy-groups:
+- name: 淘星网 TaoXingWang
+  type: select
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+  lazy: true
+  icon: {{ROOT_ICON}}
+  proxies:
+  - {{UPSTREAM_GROUP_NAMES}}
+  - {{ALL_NODE_MEMBERS}}
+  - AI服务 AI Services
+  - 流媒体 video
+  - 社交软件 Social Media
+  - 游戏 Game Platform
+  - 谷歌服务 Google Services
+  - 香港 Hongkong
+  - 台湾 Taiwan
+  - 美国 America
+  - 日本 Japan
+  - 韩国 Korea
+  - 新加坡 Singapore
+  - 冷门 Remote area
+  - 故障转移 Failover
+- {{UPSTREAM_GROUPS}}
+- name: AI服务 AI Services
+  type: url-test
+  url: https://cp.cloudflare.com/generate_204
+  interval: 300
+  tolerance: 50
+  lazy: true
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
+  proxies: {{AI_MEMBERS}}
+- name: 流媒体 video
+  type: url-test
+  url: https://www.youtube.com/generate_204
+  interval: 300
+  tolerance: 50
+  lazy: true
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
+  proxies: {{VIDEO_MEMBERS}}
+- name: 社交软件 Social Media
+  type: url-test
+  url: https://telegram.org
+  interval: 300
+  tolerance: 50
+  lazy: true
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+  proxies: {{SOCIAL_MEMBERS}}
+- name: 游戏 Game Platform
+  type: fallback
+  url: https://store.steampowered.com
+  interval: 300
+  lazy: true
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png
+  proxies: {{GAME_MEMBERS}}
+- name: 谷歌服务 Google Services
+  type: url-test
+  url: https://www.google.com/generate_204
+  interval: 300
+  tolerance: 50
+  lazy: true
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
+  proxies: {{GOOGLE_MEMBERS}}
+- name: 香港 Hongkong
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  lazy: true
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
+  proxies: {{HK_MEMBERS}}
+- name: 台湾 Taiwan
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  lazy: true
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
+  proxies: {{TW_MEMBERS}}
+- name: 美国 America
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  lazy: true
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
+  proxies: {{US_MEMBERS}}
+- name: 日本 Japan
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  lazy: true
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
+  proxies: {{JP_MEMBERS}}
+- name: 韩国 Korea
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  lazy: true
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Korea.png
+  proxies: {{KR_MEMBERS}}
+- name: 新加坡 Singapore
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  lazy: true
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+  proxies: {{SG_MEMBERS}}
+- name: 冷门 Remote area
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  lazy: true
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/World_Map.png
+  proxies: {{REMOTE_MEMBERS}}
+- name: 故障转移 Failover
+  type: fallback
+  url: https://detectportal.firefox.com/success.txt
+  interval: 300
+  lazy: true
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
+  proxies: {{ALL_NODE_MEMBERS}}
+rules:
+- DOMAIN-SUFFIX,local,DIRECT
+- DOMAIN-SUFFIX,lan,DIRECT
+- IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+- IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+- IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+- IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+- IP-CIDR,169.254.0.0/16,DIRECT,no-resolve
+- IP-CIDR6,::1/128,DIRECT,no-resolve
+- IP-CIDR6,fc00::/7,DIRECT,no-resolve
+- IP-CIDR6,fe80::/10,DIRECT,no-resolve
+- DOMAIN-SUFFIX,speedtest.cn,DIRECT
+- DOMAIN-SUFFIX,speedtests.cn,DIRECT
+- DOMAIN-SUFFIX,test.ustc.edu.cn,DIRECT
+- DOMAIN-SUFFIX,test6.nju.edu.cn,DIRECT
+- DOMAIN-SUFFIX,speed.nju.edu.cn,DIRECT
+- DOMAIN-SUFFIX,speed6.nju.edu.cn,DIRECT
+- DOMAIN-SUFFIX,speedtest.sec.edu.cn,DIRECT
+- DOMAIN-SUFFIX,speed.sc.189.cn,DIRECT
+- DOMAIN-SUFFIX,hkbn.net,淘星网 TaoXingWang
+- DOMAIN-SUFFIX,speedtest.hkbn.com.hk,淘星网 TaoXingWang
+- DOMAIN-SUFFIX,so-net.net.tw,淘星网 TaoXingWang
+- DOMAIN-SUFFIX,speed.hinet.net,淘星网 TaoXingWang
+- DOMAIN-SUFFIX,fast.com,淘星网 TaoXingWang
+- DOMAIN-SUFFIX,verizon.com,淘星网 TaoXingWang
+- DOMAIN-SUFFIX,testmy.net,淘星网 TaoXingWang
+- DOMAIN-SUFFIX,waveform.com,淘星网 TaoXingWang
+- DOMAIN-SUFFIX,speed.cloudflare.com,淘星网 TaoXingWang
+- DOMAIN-SUFFIX,radar.cloudflare.com,淘星网 TaoXingWang
+- DOMAIN-SUFFIX,speed.measurementlab.net,淘星网 TaoXingWang
+- DOMAIN-SUFFIX,speedof.me,淘星网 TaoXingWang
+- DOMAIN-SUFFIX,librespeed.org,淘星网 TaoXingWang
+- DOMAIN-SUFFIX,openspeedtest.com,淘星网 TaoXingWang
+- DOMAIN-SUFFIX,nperf.com,淘星网 TaoXingWang
+- DOMAIN-SUFFIX,meter.net,淘星网 TaoXingWang
+- DOMAIN-SUFFIX,speedtest.samknows.com,淘星网 TaoXingWang
+- DOMAIN-SUFFIX,broadbandspeedchecker.co.uk,淘星网 TaoXingWang
+- DOMAIN-SUFFIX,broadbandspeedtest.org.uk,淘星网 TaoXingWang
+- DOMAIN-SUFFIX,highspeedinternet.com,淘星网 TaoXingWang
+- DOMAIN-SUFFIX,openai.com,AI服务 AI Services
+- DOMAIN-SUFFIX,chatgpt.com,AI服务 AI Services
+- DOMAIN-SUFFIX,oaistatic.com,AI服务 AI Services
+- DOMAIN-SUFFIX,oaiusercontent.com,AI服务 AI Services
+- DOMAIN-SUFFIX,anthropic.com,AI服务 AI Services
+- DOMAIN-SUFFIX,claude.ai,AI服务 AI Services
+- DOMAIN-SUFFIX,perplexity.ai,AI服务 AI Services
+- DOMAIN-SUFFIX,grok.com,AI服务 AI Services
+- DOMAIN-SUFFIX,x.ai,AI服务 AI Services
+- DOMAIN-SUFFIX,gemini.google.com,AI服务 AI Services
+- DOMAIN-SUFFIX,generativelanguage.googleapis.com,AI服务 AI Services
+- DOMAIN-SUFFIX,ai.google.dev,AI服务 AI Services
+- DOMAIN-SUFFIX,youtube.com,流媒体 video
+- DOMAIN-SUFFIX,youtu.be,流媒体 video
+- DOMAIN-SUFFIX,ytimg.com,流媒体 video
+- DOMAIN-SUFFIX,netflix.com,流媒体 video
+- DOMAIN-SUFFIX,nflxvideo.net,流媒体 video
+- DOMAIN-SUFFIX,disneyplus.com,流媒体 video
+- DOMAIN-SUFFIX,dssott.com,流媒体 video
+- DOMAIN-SUFFIX,hulu.com,流媒体 video
+- DOMAIN-SUFFIX,twitch.tv,流媒体 video
+- DOMAIN-SUFFIX,ttvnw.net,流媒体 video
+- DOMAIN-SUFFIX,spotify.com,流媒体 video
+- DOMAIN-SUFFIX,scdn.co,流媒体 video
+- DOMAIN-SUFFIX,telegram.org,社交软件 Social Media
+- DOMAIN-SUFFIX,t.me,社交软件 Social Media
+- DOMAIN-SUFFIX,telegram.me,社交软件 Social Media
+- DOMAIN-SUFFIX,twitter.com,社交软件 Social Media
+- DOMAIN-SUFFIX,x.com,社交软件 Social Media
+- DOMAIN-SUFFIX,twimg.com,社交软件 Social Media
+- DOMAIN-SUFFIX,facebook.com,社交软件 Social Media
+- DOMAIN-SUFFIX,fbcdn.net,社交软件 Social Media
+- DOMAIN-SUFFIX,instagram.com,社交软件 Social Media
+- DOMAIN-SUFFIX,whatsapp.com,社交软件 Social Media
+- DOMAIN-SUFFIX,discord.com,社交软件 Social Media
+- DOMAIN-SUFFIX,discord.gg,社交软件 Social Media
+- DOMAIN-SUFFIX,discordapp.com,社交软件 Social Media
+- DOMAIN-SUFFIX,steampowered.com,游戏 Game Platform
+- DOMAIN-SUFFIX,steamcommunity.com,游戏 Game Platform
+- DOMAIN-SUFFIX,steamstatic.com,游戏 Game Platform
+- DOMAIN-SUFFIX,steamcontent.com,游戏 Game Platform
+- DOMAIN-SUFFIX,epicgames.com,游戏 Game Platform
+- DOMAIN-SUFFIX,battle.net,游戏 Game Platform
+- DOMAIN-SUFFIX,blizzard.com,游戏 Game Platform
+- DOMAIN-SUFFIX,xboxlive.com,游戏 Game Platform
+- DOMAIN-SUFFIX,playstation.net,游戏 Game Platform
+- DOMAIN-SUFFIX,nintendo.net,游戏 Game Platform
+- DOMAIN-SUFFIX,google.com,谷歌服务 Google Services
+- DOMAIN-SUFFIX,googleapis.com,谷歌服务 Google Services
+- DOMAIN-SUFFIX,gstatic.com,谷歌服务 Google Services
+- DOMAIN-SUFFIX,googleusercontent.com,谷歌服务 Google Services
+- DOMAIN-SUFFIX,googlevideo.com,谷歌服务 Google Services
+- DOMAIN-SUFFIX,gvt1.com,谷歌服务 Google Services
+- DOMAIN-SUFFIX,gmail.com,谷歌服务 Google Services
+- DOMAIN-SUFFIX,googlesyndication.com,谷歌服务 Google Services
+- DOMAIN-SUFFIX,googleadservices.com,谷歌服务 Google Services
+- DOMAIN-SUFFIX,cn,DIRECT
+- DOMAIN-SUFFIX,qq.com,DIRECT
+- DOMAIN-SUFFIX,weixin.com,DIRECT
+- DOMAIN-SUFFIX,weixin.qq.com,DIRECT
+- DOMAIN-SUFFIX,alipay.com,DIRECT
+- DOMAIN-SUFFIX,taobao.com,DIRECT
+- DOMAIN-SUFFIX,tmall.com,DIRECT
+- DOMAIN-SUFFIX,jd.com,DIRECT
+- DOMAIN-SUFFIX,baidu.com,DIRECT
+- DOMAIN-SUFFIX,bilibili.com,DIRECT
+- DOMAIN-SUFFIX,163.com,DIRECT
+- DOMAIN-SUFFIX,126.com,DIRECT
+- DOMAIN-SUFFIX,aliyun.com,DIRECT
+- DOMAIN-SUFFIX,douyin.com,DIRECT
+- DOMAIN-SUFFIX,mi.com,DIRECT
+- DOMAIN-SUFFIX,xiaomi.com,DIRECT
+- GEOIP,CN,DIRECT
+- MATCH,淘星网 TaoXingWang
