@@ -1,6 +1,17 @@
+# Orbit v3.0.3 / OpenClash（Mihomo） · 正常订阅：独立模板。
+# 将完整内容粘贴到后台对应客户端的 YAML 编辑器，预览、校验后再发布。
+# 动态占位符由 Orbit 在下发时展开，本文件不能直接导入 OpenClash（Mihomo）。
+# 第一个策略组为可见的纯中文“淘星网”，动态下发分组的第一选项指向该根组。
+# 自动选择包含启用、未归档下发分组中当前用户有权使用的全部兼容节点，包括冷门。
+# 淘星网的第一选项为自动选择；五个业务分组的第一选项均为淘星网。
+# 所有策略组每 300 秒主动测速；select 组显示延迟但不会自动切换选项。
+# 国内应用默认直连，可手动切换为淘星网代理；国内域名库每天自动更新。
+# 淘星TV指定服务器IP直接命中 DIRECT，不受国内应用手动切换影响。
 mixed-port: 7890
-allow-lan: false
-bind-address: 127.0.0.1
+redir-port: 7892
+tproxy-port: 7893
+allow-lan: true
+bind-address: '*'
 mode: rule
 log-level: warning
 ipv6: true
@@ -9,7 +20,7 @@ profile:
   store-selected: true
 dns:
   enable: true
-  listen: 127.0.0.1:1053
+  listen: 0.0.0.0:7874
   ipv6: true
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
@@ -24,9 +35,12 @@ dns:
   - https://223.5.5.5/dns-query
   - https://1.12.12.12/dns-query
   nameserver:
-  - https://1.1.1.1/dns-query#淘星网 TaoXingWang
+  - https://1.1.1.1/dns-query#淘星网
   fallback: []
   nameserver-policy:
+    "rule-set:国内应用域名库":
+    - https://223.5.5.5/dns-query
+    - https://1.12.12.12/dns-query
     +.cn:
     - https://223.5.5.5/dns-query
     +.qq.com:
@@ -36,154 +50,187 @@ dns:
   respect-rules: true
   direct-nameserver:
   - https://223.5.5.5/dns-query
-tun:
-  enable: false
-  stack: mixed
-  auto-route: true
-  auto-detect-interface: true
-  dns-hijack:
-  - any:53
-  - tcp://any:53
+  - https://1.12.12.12/dns-query
 x-orbit:
   version: 2
   upstream-groups:
-    name-format: "{source}"
-    type: url-test
+    name-format: '{source}'
+    type: select
     url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
-    lazy: true
+    lazy: false
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Ox.png
     member-selector: source
     sort: source-order
     empty: reject
+    node-prefix-format: '{source}'
+    root-first: true
+    source-prefix-formats:
+    - source-key: 9ab736b7-6c27-40cf-9cd8-1879114912c1
+      format: 高速
+    - source-key: b2448e9b-19e7-4267-8a84-6d19596d3374
+      format: 低速
+    - source-key: e3a79dc0-3f33-45d6-ad41-1487c14cebf7
+      format: 备用
 proxies: {{PROXIES}}
 proxy-groups:
-- name: 淘星网 TaoXingWang
+- name: 淘星网
   type: select
   url: http://www.gstatic.com/generate_204
   interval: 300
-  lazy: true
+  lazy: false
   icon: {{ROOT_ICON}}
   proxies:
+  - 自动选择
   - {{UPSTREAM_GROUP_NAMES}}
+  - 香港
+  - 台湾
+  - 美国
+  - 日本
+  - 韩国
+  - 新加坡
+  - 冷门
+  - 故障转移
   - {{ALL_NODE_MEMBERS}}
-  - AI服务 AI Services
-  - 流媒体 video
-  - 社交软件 Social Media
-  - 游戏 Game Platform
-  - 谷歌服务 Google Services
-  - 香港 Hongkong
-  - 台湾 Taiwan
-  - 美国 America
-  - 日本 Japan
-  - 韩国 Korea
-  - 新加坡 Singapore
-  - 冷门 Remote area
-  - 故障转移 Failover
-- {{UPSTREAM_GROUPS}}
-- name: AI服务 AI Services
+- name: 自动选择
   type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  lazy: false
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
+  proxies: {{ALL_NODE_MEMBERS}}
+- {{UPSTREAM_GROUPS}}
+- name: AI服务
+  type: select
   url: https://cp.cloudflare.com/generate_204
   interval: 300
   tolerance: 50
-  lazy: true
+  lazy: false
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
-  proxies: {{AI_MEMBERS}}
-- name: 流媒体 video
-  type: url-test
+  proxies:
+  - 淘星网
+  - {{AI_MEMBERS}}
+- name: 流媒体
+  type: select
   url: https://www.youtube.com/generate_204
   interval: 300
   tolerance: 50
-  lazy: true
+  lazy: false
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
-  proxies: {{VIDEO_MEMBERS}}
-- name: 社交软件 Social Media
-  type: url-test
+  proxies:
+  - 淘星网
+  - {{VIDEO_MEMBERS}}
+- name: 社交软件
+  type: select
   url: https://telegram.org
   interval: 300
   tolerance: 50
-  lazy: true
+  lazy: false
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
-  proxies: {{SOCIAL_MEMBERS}}
-- name: 游戏 Game Platform
-  type: fallback
+  proxies:
+  - 淘星网
+  - {{SOCIAL_MEMBERS}}
+- name: 游戏
+  type: select
   url: https://store.steampowered.com
   interval: 300
-  lazy: true
+  lazy: false
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png
-  proxies: {{GAME_MEMBERS}}
-- name: 谷歌服务 Google Services
-  type: url-test
+  proxies:
+  - 淘星网
+  - {{GAME_MEMBERS}}
+- name: 谷歌服务
+  type: select
   url: https://www.google.com/generate_204
   interval: 300
   tolerance: 50
-  lazy: true
+  lazy: false
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
-  proxies: {{GOOGLE_MEMBERS}}
-- name: 香港 Hongkong
+  proxies:
+  - 淘星网
+  - {{GOOGLE_MEMBERS}}
+- name: 香港
   type: url-test
   url: https://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
-  lazy: true
+  lazy: false
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
   proxies: {{HK_MEMBERS}}
-- name: 台湾 Taiwan
+- name: 台湾
   type: url-test
   url: https://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
-  lazy: true
+  lazy: false
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
   proxies: {{TW_MEMBERS}}
-- name: 美国 America
+- name: 美国
   type: url-test
   url: https://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
-  lazy: true
+  lazy: false
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
   proxies: {{US_MEMBERS}}
-- name: 日本 Japan
+- name: 日本
   type: url-test
   url: https://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
-  lazy: true
+  lazy: false
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
   proxies: {{JP_MEMBERS}}
-- name: 韩国 Korea
+- name: 韩国
   type: url-test
   url: https://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
-  lazy: true
+  lazy: false
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Korea.png
   proxies: {{KR_MEMBERS}}
-- name: 新加坡 Singapore
+- name: 新加坡
   type: url-test
   url: https://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
-  lazy: true
+  lazy: false
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
   proxies: {{SG_MEMBERS}}
-- name: 冷门 Remote area
-  type: url-test
+- name: 冷门
+  type: select
   url: https://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
-  lazy: true
+  lazy: false
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/World_Map.png
   proxies: {{REMOTE_MEMBERS}}
-- name: 故障转移 Failover
+- name: 国内应用
+  type: select
+  url: https://www.baidu.com
+  interval: 300
+  lazy: false
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
+  proxies:
+  - DIRECT
+  - 淘星网
+- name: 故障转移
   type: fallback
   url: https://detectportal.firefox.com/success.txt
   interval: 300
-  lazy: true
+  lazy: false
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
   proxies: {{ALL_NODE_MEMBERS}}
+rule-providers:
+  国内应用域名库:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs
+    path: ./ruleset/geosite-cn.mrs
+    interval: 86400
 rules:
 - DOMAIN-SUFFIX,local,DIRECT
 - DOMAIN-SUFFIX,lan,DIRECT
@@ -195,6 +242,21 @@ rules:
 - IP-CIDR6,::1/128,DIRECT,no-resolve
 - IP-CIDR6,fc00::/7,DIRECT,no-resolve
 - IP-CIDR6,fe80::/10,DIRECT,no-resolve
+# 淘星TV：指定服务器强制直连
+- IP-CIDR,23.237.231.61/32,DIRECT,no-resolve
+- IP-CIDR,23.237.231.63/32,DIRECT,no-resolve
+- IP-CIDR,23.237.231.64/32,DIRECT,no-resolve
+- IP-CIDR,23.237.231.73/32,DIRECT,no-resolve
+- IP-CIDR,23.237.231.74/32,DIRECT,no-resolve
+- IP-CIDR,23.237.231.72/32,DIRECT,no-resolve
+- IP-CIDR,23.237.231.71/32,DIRECT,no-resolve
+- IP-CIDR,64.62.198.69/32,DIRECT,no-resolve
+- IP-CIDR,64.62.198.66/32,DIRECT,no-resolve
+- IP-CIDR,64.62.198.119/32,DIRECT,no-resolve
+- IP-CIDR,64.62.198.109/32,DIRECT,no-resolve
+- IP-CIDR,64.62.198.101/32,DIRECT,no-resolve
+- IP-CIDR,64.62.198.102/32,DIRECT,no-resolve
+- IP-CIDR,42.200.223.79/32,DIRECT,no-resolve
 - DOMAIN-SUFFIX,speedtest.cn,DIRECT
 - DOMAIN-SUFFIX,speedtests.cn,DIRECT
 - DOMAIN-SUFFIX,test.ustc.edu.cn,DIRECT
@@ -203,97 +265,353 @@ rules:
 - DOMAIN-SUFFIX,speed6.nju.edu.cn,DIRECT
 - DOMAIN-SUFFIX,speedtest.sec.edu.cn,DIRECT
 - DOMAIN-SUFFIX,speed.sc.189.cn,DIRECT
-- DOMAIN-SUFFIX,hkbn.net,淘星网 TaoXingWang
-- DOMAIN-SUFFIX,speedtest.hkbn.com.hk,淘星网 TaoXingWang
-- DOMAIN-SUFFIX,so-net.net.tw,淘星网 TaoXingWang
-- DOMAIN-SUFFIX,speed.hinet.net,淘星网 TaoXingWang
-- DOMAIN-SUFFIX,fast.com,淘星网 TaoXingWang
-- DOMAIN-SUFFIX,verizon.com,淘星网 TaoXingWang
-- DOMAIN-SUFFIX,testmy.net,淘星网 TaoXingWang
-- DOMAIN-SUFFIX,waveform.com,淘星网 TaoXingWang
-- DOMAIN-SUFFIX,speed.cloudflare.com,淘星网 TaoXingWang
-- DOMAIN-SUFFIX,radar.cloudflare.com,淘星网 TaoXingWang
-- DOMAIN-SUFFIX,speed.measurementlab.net,淘星网 TaoXingWang
-- DOMAIN-SUFFIX,speedof.me,淘星网 TaoXingWang
-- DOMAIN-SUFFIX,librespeed.org,淘星网 TaoXingWang
-- DOMAIN-SUFFIX,openspeedtest.com,淘星网 TaoXingWang
-- DOMAIN-SUFFIX,nperf.com,淘星网 TaoXingWang
-- DOMAIN-SUFFIX,meter.net,淘星网 TaoXingWang
-- DOMAIN-SUFFIX,speedtest.samknows.com,淘星网 TaoXingWang
-- DOMAIN-SUFFIX,broadbandspeedchecker.co.uk,淘星网 TaoXingWang
-- DOMAIN-SUFFIX,broadbandspeedtest.org.uk,淘星网 TaoXingWang
-- DOMAIN-SUFFIX,highspeedinternet.com,淘星网 TaoXingWang
-- DOMAIN-SUFFIX,openai.com,AI服务 AI Services
-- DOMAIN-SUFFIX,chatgpt.com,AI服务 AI Services
-- DOMAIN-SUFFIX,oaistatic.com,AI服务 AI Services
-- DOMAIN-SUFFIX,oaiusercontent.com,AI服务 AI Services
-- DOMAIN-SUFFIX,anthropic.com,AI服务 AI Services
-- DOMAIN-SUFFIX,claude.ai,AI服务 AI Services
-- DOMAIN-SUFFIX,perplexity.ai,AI服务 AI Services
-- DOMAIN-SUFFIX,grok.com,AI服务 AI Services
-- DOMAIN-SUFFIX,x.ai,AI服务 AI Services
-- DOMAIN-SUFFIX,gemini.google.com,AI服务 AI Services
-- DOMAIN-SUFFIX,generativelanguage.googleapis.com,AI服务 AI Services
-- DOMAIN-SUFFIX,ai.google.dev,AI服务 AI Services
-- DOMAIN-SUFFIX,youtube.com,流媒体 video
-- DOMAIN-SUFFIX,youtu.be,流媒体 video
-- DOMAIN-SUFFIX,ytimg.com,流媒体 video
-- DOMAIN-SUFFIX,netflix.com,流媒体 video
-- DOMAIN-SUFFIX,nflxvideo.net,流媒体 video
-- DOMAIN-SUFFIX,disneyplus.com,流媒体 video
-- DOMAIN-SUFFIX,dssott.com,流媒体 video
-- DOMAIN-SUFFIX,hulu.com,流媒体 video
-- DOMAIN-SUFFIX,twitch.tv,流媒体 video
-- DOMAIN-SUFFIX,ttvnw.net,流媒体 video
-- DOMAIN-SUFFIX,spotify.com,流媒体 video
-- DOMAIN-SUFFIX,scdn.co,流媒体 video
-- DOMAIN-SUFFIX,telegram.org,社交软件 Social Media
-- DOMAIN-SUFFIX,t.me,社交软件 Social Media
-- DOMAIN-SUFFIX,telegram.me,社交软件 Social Media
-- DOMAIN-SUFFIX,twitter.com,社交软件 Social Media
-- DOMAIN-SUFFIX,x.com,社交软件 Social Media
-- DOMAIN-SUFFIX,twimg.com,社交软件 Social Media
-- DOMAIN-SUFFIX,facebook.com,社交软件 Social Media
-- DOMAIN-SUFFIX,fbcdn.net,社交软件 Social Media
-- DOMAIN-SUFFIX,instagram.com,社交软件 Social Media
-- DOMAIN-SUFFIX,whatsapp.com,社交软件 Social Media
-- DOMAIN-SUFFIX,discord.com,社交软件 Social Media
-- DOMAIN-SUFFIX,discord.gg,社交软件 Social Media
-- DOMAIN-SUFFIX,discordapp.com,社交软件 Social Media
-- DOMAIN-SUFFIX,steampowered.com,游戏 Game Platform
-- DOMAIN-SUFFIX,steamcommunity.com,游戏 Game Platform
-- DOMAIN-SUFFIX,steamstatic.com,游戏 Game Platform
-- DOMAIN-SUFFIX,steamcontent.com,游戏 Game Platform
-- DOMAIN-SUFFIX,epicgames.com,游戏 Game Platform
-- DOMAIN-SUFFIX,battle.net,游戏 Game Platform
-- DOMAIN-SUFFIX,blizzard.com,游戏 Game Platform
-- DOMAIN-SUFFIX,xboxlive.com,游戏 Game Platform
-- DOMAIN-SUFFIX,playstation.net,游戏 Game Platform
-- DOMAIN-SUFFIX,nintendo.net,游戏 Game Platform
-- DOMAIN-SUFFIX,google.com,谷歌服务 Google Services
-- DOMAIN-SUFFIX,googleapis.com,谷歌服务 Google Services
-- DOMAIN-SUFFIX,gstatic.com,谷歌服务 Google Services
-- DOMAIN-SUFFIX,googleusercontent.com,谷歌服务 Google Services
-- DOMAIN-SUFFIX,googlevideo.com,谷歌服务 Google Services
-- DOMAIN-SUFFIX,gvt1.com,谷歌服务 Google Services
-- DOMAIN-SUFFIX,gmail.com,谷歌服务 Google Services
-- DOMAIN-SUFFIX,googlesyndication.com,谷歌服务 Google Services
-- DOMAIN-SUFFIX,googleadservices.com,谷歌服务 Google Services
-- DOMAIN-SUFFIX,cn,DIRECT
-- DOMAIN-SUFFIX,qq.com,DIRECT
-- DOMAIN-SUFFIX,weixin.com,DIRECT
-- DOMAIN-SUFFIX,weixin.qq.com,DIRECT
-- DOMAIN-SUFFIX,alipay.com,DIRECT
-- DOMAIN-SUFFIX,taobao.com,DIRECT
-- DOMAIN-SUFFIX,tmall.com,DIRECT
-- DOMAIN-SUFFIX,jd.com,DIRECT
-- DOMAIN-SUFFIX,baidu.com,DIRECT
-- DOMAIN-SUFFIX,bilibili.com,DIRECT
-- DOMAIN-SUFFIX,163.com,DIRECT
-- DOMAIN-SUFFIX,126.com,DIRECT
-- DOMAIN-SUFFIX,aliyun.com,DIRECT
-- DOMAIN-SUFFIX,douyin.com,DIRECT
-- DOMAIN-SUFFIX,mi.com,DIRECT
-- DOMAIN-SUFFIX,xiaomi.com,DIRECT
-- GEOIP,CN,DIRECT
-- MATCH,淘星网 TaoXingWang
+- DOMAIN-SUFFIX,hkbn.net,淘星网
+- DOMAIN-SUFFIX,speedtest.hkbn.com.hk,淘星网
+- DOMAIN-SUFFIX,so-net.net.tw,淘星网
+- DOMAIN-SUFFIX,speed.hinet.net,淘星网
+- DOMAIN-SUFFIX,fast.com,淘星网
+- DOMAIN-SUFFIX,verizon.com,淘星网
+- DOMAIN-SUFFIX,testmy.net,淘星网
+- DOMAIN-SUFFIX,waveform.com,淘星网
+- DOMAIN-SUFFIX,speed.cloudflare.com,淘星网
+- DOMAIN-SUFFIX,radar.cloudflare.com,淘星网
+- DOMAIN-SUFFIX,speed.measurementlab.net,淘星网
+- DOMAIN-SUFFIX,speedof.me,淘星网
+- DOMAIN-SUFFIX,librespeed.org,淘星网
+- DOMAIN-SUFFIX,openspeedtest.com,淘星网
+- DOMAIN-SUFFIX,nperf.com,淘星网
+- DOMAIN-SUFFIX,meter.net,淘星网
+- DOMAIN-SUFFIX,speedtest.samknows.com,淘星网
+- DOMAIN-SUFFIX,broadbandspeedchecker.co.uk,淘星网
+- DOMAIN-SUFFIX,broadbandspeedtest.org.uk,淘星网
+- DOMAIN-SUFFIX,highspeedinternet.com,淘星网
+- DOMAIN-SUFFIX,openai.com,AI服务
+- DOMAIN-SUFFIX,chatgpt.com,AI服务
+- DOMAIN-SUFFIX,oaistatic.com,AI服务
+- DOMAIN-SUFFIX,oaiusercontent.com,AI服务
+- DOMAIN-SUFFIX,anthropic.com,AI服务
+- DOMAIN-SUFFIX,claude.ai,AI服务
+- DOMAIN-SUFFIX,perplexity.ai,AI服务
+- DOMAIN-SUFFIX,grok.com,AI服务
+- DOMAIN-SUFFIX,x.ai,AI服务
+- DOMAIN-SUFFIX,gemini.google.com,AI服务
+- DOMAIN-SUFFIX,generativelanguage.googleapis.com,AI服务
+- DOMAIN-SUFFIX,ai.google.dev,AI服务
+- DOMAIN-SUFFIX,youtube.com,流媒体
+- DOMAIN-SUFFIX,youtu.be,流媒体
+- DOMAIN-SUFFIX,ytimg.com,流媒体
+- DOMAIN-SUFFIX,netflix.com,流媒体
+- DOMAIN-SUFFIX,nflxvideo.net,流媒体
+- DOMAIN-SUFFIX,disneyplus.com,流媒体
+- DOMAIN-SUFFIX,dssott.com,流媒体
+- DOMAIN-SUFFIX,hulu.com,流媒体
+- DOMAIN-SUFFIX,twitch.tv,流媒体
+- DOMAIN-SUFFIX,ttvnw.net,流媒体
+- DOMAIN-SUFFIX,spotify.com,流媒体
+- DOMAIN-SUFFIX,scdn.co,流媒体
+- DOMAIN-SUFFIX,telegram.org,社交软件
+- DOMAIN-SUFFIX,t.me,社交软件
+- DOMAIN-SUFFIX,telegram.me,社交软件
+- DOMAIN-SUFFIX,twitter.com,社交软件
+- DOMAIN-SUFFIX,x.com,社交软件
+- DOMAIN-SUFFIX,twimg.com,社交软件
+- DOMAIN-SUFFIX,facebook.com,社交软件
+- DOMAIN-SUFFIX,fbcdn.net,社交软件
+- DOMAIN-SUFFIX,instagram.com,社交软件
+- DOMAIN-SUFFIX,whatsapp.com,社交软件
+- DOMAIN-SUFFIX,discord.com,社交软件
+- DOMAIN-SUFFIX,discord.gg,社交软件
+- DOMAIN-SUFFIX,discordapp.com,社交软件
+- DOMAIN-SUFFIX,steampowered.com,游戏
+- DOMAIN-SUFFIX,steamcommunity.com,游戏
+- DOMAIN-SUFFIX,steamstatic.com,游戏
+- DOMAIN-SUFFIX,steamcontent.com,游戏
+- DOMAIN-SUFFIX,epicgames.com,游戏
+- DOMAIN-SUFFIX,battle.net,游戏
+- DOMAIN-SUFFIX,blizzard.com,游戏
+- DOMAIN-SUFFIX,xboxlive.com,游戏
+- DOMAIN-SUFFIX,playstation.net,游戏
+- DOMAIN-SUFFIX,nintendo.net,游戏
+- DOMAIN-SUFFIX,google.com,谷歌服务
+- DOMAIN-SUFFIX,googleapis.com,谷歌服务
+- DOMAIN-SUFFIX,gstatic.com,谷歌服务
+- DOMAIN-SUFFIX,googleusercontent.com,谷歌服务
+- DOMAIN-SUFFIX,googlevideo.com,谷歌服务
+- DOMAIN-SUFFIX,gvt1.com,谷歌服务
+- DOMAIN-SUFFIX,gmail.com,谷歌服务
+- DOMAIN-SUFFIX,googlesyndication.com,谷歌服务
+- DOMAIN-SUFFIX,googleadservices.com,谷歌服务
+# 国内应用：常用服务显式规则（默认 DIRECT，可在分组内切换为淘星网）
+- DOMAIN-SUFFIX,cn,国内应用
+# 通信、门户与邮箱
+- DOMAIN-SUFFIX,qq.com,国内应用
+- DOMAIN-SUFFIX,qpic.cn,国内应用
+- DOMAIN-SUFFIX,gtimg.com,国内应用
+- DOMAIN-SUFFIX,idqqimg.com,国内应用
+- DOMAIN-SUFFIX,qlogo.cn,国内应用
+- DOMAIN-SUFFIX,url.cn,国内应用
+- DOMAIN-SUFFIX,tencent.com,国内应用
+- DOMAIN-SUFFIX,tencent-cloud.com,国内应用
+- DOMAIN-SUFFIX,qcloud.com,国内应用
+- DOMAIN-SUFFIX,myqcloud.com,国内应用
+- DOMAIN-SUFFIX,weixin.com,国内应用
+- DOMAIN-SUFFIX,weixin.qq.com,国内应用
+- DOMAIN-SUFFIX,wechat.com,国内应用
+- DOMAIN-SUFFIX,wechatpay.cn,国内应用
+- DOMAIN-SUFFIX,tenpay.com,国内应用
+- DOMAIN-SUFFIX,foxmail.com,国内应用
+- DOMAIN-SUFFIX,163.com,国内应用
+- DOMAIN-SUFFIX,126.com,国内应用
+- DOMAIN-SUFFIX,126.net,国内应用
+- DOMAIN-SUFFIX,netease.com,国内应用
+- DOMAIN-SUFFIX,netease.im,国内应用
+- DOMAIN-SUFFIX,yeah.net,国内应用
+- DOMAIN-SUFFIX,youdao.com,国内应用
+- DOMAIN-SUFFIX,sina.com.cn,国内应用
+- DOMAIN-SUFFIX,sina.cn,国内应用
+- DOMAIN-SUFFIX,sinaimg.cn,国内应用
+- DOMAIN-SUFFIX,weibo.com,国内应用
+- DOMAIN-SUFFIX,weibocdn.com,国内应用
+- DOMAIN-SUFFIX,sohu.com,国内应用
+- DOMAIN-SUFFIX,sohucs.com,国内应用
+# 影视、音乐、直播与短视频
+- DOMAIN-SUFFIX,iqiyi.com,国内应用
+- DOMAIN-SUFFIX,qiyi.com,国内应用
+- DOMAIN-SUFFIX,qiyipic.com,国内应用
+- DOMAIN-SUFFIX,pps.tv,国内应用
+- DOMAIN-SUFFIX,youku.com,国内应用
+- DOMAIN-SUFFIX,ykimg.com,国内应用
+- DOMAIN-SUFFIX,tudou.com,国内应用
+- DOMAIN-SUFFIX,bilibili.com,国内应用
+- DOMAIN-SUFFIX,bilivideo.com,国内应用
+- DOMAIN-SUFFIX,hdslb.com,国内应用
+- DOMAIN-SUFFIX,acg.tv,国内应用
+- DOMAIN-SUFFIX,mgtv.com,国内应用
+- DOMAIN-SUFFIX,hunantv.com,国内应用
+- DOMAIN-SUFFIX,pptv.com,国内应用
+- DOMAIN-SUFFIX,le.com,国内应用
+- DOMAIN-SUFFIX,letv.com,国内应用
+- DOMAIN-SUFFIX,douyin.com,国内应用
+- DOMAIN-SUFFIX,douyinvod.com,国内应用
+- DOMAIN-SUFFIX,douyinpic.com,国内应用
+- DOMAIN-SUFFIX,douyinstatic.com,国内应用
+- DOMAIN-SUFFIX,iesdouyin.com,国内应用
+- DOMAIN-SUFFIX,ixigua.com,国内应用
+- DOMAIN-SUFFIX,ixgvideo.com,国内应用
+- DOMAIN-SUFFIX,byteimg.com,国内应用
+- DOMAIN-SUFFIX,bytedance.com,国内应用
+- DOMAIN-SUFFIX,snssdk.com,国内应用
+- DOMAIN-SUFFIX,toutiao.com,国内应用
+- DOMAIN-SUFFIX,toutiaoimg.com,国内应用
+- DOMAIN-SUFFIX,kuaishou.com,国内应用
+- DOMAIN-SUFFIX,gifshow.com,国内应用
+- DOMAIN-SUFFIX,ksapisrv.com,国内应用
+- DOMAIN-SUFFIX,kspkg.com,国内应用
+- DOMAIN-SUFFIX,huya.com,国内应用
+- DOMAIN-SUFFIX,huyacdn.com,国内应用
+- DOMAIN-SUFFIX,douyu.com,国内应用
+- DOMAIN-SUFFIX,douyucdn.cn,国内应用
+- DOMAIN-SUFFIX,kugou.com,国内应用
+- DOMAIN-SUFFIX,kuwo.cn,国内应用
+- DOMAIN-SUFFIX,ximalaya.com,国内应用
+- DOMAIN-SUFFIX,xmcdn.com,国内应用
+# 电商、支付与本地生活
+- DOMAIN-SUFFIX,taobao.com,国内应用
+- DOMAIN-SUFFIX,tmall.com,国内应用
+- DOMAIN-SUFFIX,tmall.hk,国内应用
+- DOMAIN-SUFFIX,1688.com,国内应用
+- DOMAIN-SUFFIX,alibaba.com,国内应用
+- DOMAIN-SUFFIX,alibabacloud.com,国内应用
+- DOMAIN-SUFFIX,alicdn.com,国内应用
+- DOMAIN-SUFFIX,alipay.com,国内应用
+- DOMAIN-SUFFIX,aliyun.com,国内应用
+- DOMAIN-SUFFIX,aliyuncs.com,国内应用
+- DOMAIN-SUFFIX,antgroup.com,国内应用
+- DOMAIN-SUFFIX,etao.com,国内应用
+- DOMAIN-SUFFIX,alimama.com,国内应用
+- DOMAIN-SUFFIX,mmstat.com,国内应用
+- DOMAIN-SUFFIX,cainiao.com,国内应用
+- DOMAIN-SUFFIX,cainiao-inc.com,国内应用
+- DOMAIN-SUFFIX,ele.me,国内应用
+- DOMAIN-SUFFIX,koubei.com,国内应用
+- DOMAIN-SUFFIX,fliggy.com,国内应用
+- DOMAIN-SUFFIX,jd.com,国内应用
+- DOMAIN-SUFFIX,jd.hk,国内应用
+- DOMAIN-SUFFIX,360buyimg.com,国内应用
+- DOMAIN-SUFFIX,jcloud.com,国内应用
+- DOMAIN-SUFFIX,jdcloud.com,国内应用
+- DOMAIN-SUFFIX,jdpay.com,国内应用
+- DOMAIN-SUFFIX,jingxi.com,国内应用
+- DOMAIN-SUFFIX,pinduoduo.com,国内应用
+- DOMAIN-SUFFIX,yangkeduo.com,国内应用
+- DOMAIN-SUFFIX,pddpic.com,国内应用
+- DOMAIN-SUFFIX,suning.com,国内应用
+- DOMAIN-SUFFIX,suning.cn,国内应用
+- DOMAIN-SUFFIX,meituan.com,国内应用
+- DOMAIN-SUFFIX,meituan.net,国内应用
+- DOMAIN-SUFFIX,dianping.com,国内应用
+- DOMAIN-SUFFIX,dpfile.com,国内应用
+- DOMAIN-SUFFIX,vip.com,国内应用
+- DOMAIN-SUFFIX,vipstatic.com,国内应用
+- DOMAIN-SUFFIX,dangdang.com,国内应用
+# 搜索、云服务、地图与设备服务
+- DOMAIN-SUFFIX,baidu.com,国内应用
+- DOMAIN-SUFFIX,bdimg.com,国内应用
+- DOMAIN-SUFFIX,bcebos.com,国内应用
+- DOMAIN-SUFFIX,baidubce.com,国内应用
+- DOMAIN-SUFFIX,hao123.com,国内应用
+- DOMAIN-SUFFIX,360.cn,国内应用
+- DOMAIN-SUFFIX,so.com,国内应用
+- DOMAIN-SUFFIX,qhimg.com,国内应用
+- DOMAIN-SUFFIX,qhres.com,国内应用
+- DOMAIN-SUFFIX,sogou.com,国内应用
+- DOMAIN-SUFFIX,sogoucdn.com,国内应用
+- DOMAIN-SUFFIX,sm.cn,国内应用
+- DOMAIN-SUFFIX,uc.cn,国内应用
+- DOMAIN-SUFFIX,ucweb.com,国内应用
+- DOMAIN-SUFFIX,amap.com,国内应用
+- DOMAIN-SUFFIX,autonavi.com,国内应用
+- DOMAIN-SUFFIX,gaode.com,国内应用
+- DOMAIN-SUFFIX,mapbar.com,国内应用
+- DOMAIN-SUFFIX,wps.cn,国内应用
+- DOMAIN-SUFFIX,wps.com,国内应用
+- DOMAIN-SUFFIX,kingsoft.com,国内应用
+- DOMAIN-SUFFIX,ksyun.com,国内应用
+- DOMAIN-SUFFIX,xiaomi.com,国内应用
+- DOMAIN-SUFFIX,mi.com,国内应用
+- DOMAIN-SUFFIX,miui.com,国内应用
+- DOMAIN-SUFFIX,mi-img.com,国内应用
+- DOMAIN-SUFFIX,mipay.com,国内应用
+- DOMAIN-SUFFIX,oppo.com,国内应用
+- DOMAIN-SUFFIX,oppo.cn,国内应用
+- DOMAIN-SUFFIX,coloros.com,国内应用
+- DOMAIN-SUFFIX,vivo.com.cn,国内应用
+- DOMAIN-SUFFIX,huawei.com,国内应用
+- DOMAIN-SUFFIX,vmall.com,国内应用
+- DOMAIN-SUFFIX,huaweicloud.com,国内应用
+- DOMAIN-SUFFIX,hicloud.com,国内应用
+- DOMAIN-SUFFIX,honor.com,国内应用
+- DOMAIN-SUFFIX,honor.cn,国内应用
+- DOMAIN-SUFFIX,lenovo.com.cn,国内应用
+- DOMAIN-SUFFIX,zte.com.cn,国内应用
+# 新闻、知识与社区
+- DOMAIN-SUFFIX,people.com.cn,国内应用
+- DOMAIN-SUFFIX,xinhuanet.com,国内应用
+- DOMAIN-SUFFIX,cctv.com,国内应用
+- DOMAIN-SUFFIX,cctv.cn,国内应用
+- DOMAIN-SUFFIX,cntv.cn,国内应用
+- DOMAIN-SUFFIX,chinanews.com.cn,国内应用
+- DOMAIN-SUFFIX,china.com.cn,国内应用
+- DOMAIN-SUFFIX,thepaper.cn,国内应用
+- DOMAIN-SUFFIX,guancha.cn,国内应用
+- DOMAIN-SUFFIX,ifeng.com,国内应用
+- DOMAIN-SUFFIX,ifengimg.com,国内应用
+- DOMAIN-SUFFIX,eastday.com,国内应用
+- DOMAIN-SUFFIX,gmw.cn,国内应用
+- DOMAIN-SUFFIX,youth.cn,国内应用
+- DOMAIN-SUFFIX,caixin.com,国内应用
+- DOMAIN-SUFFIX,jiemian.com,国内应用
+- DOMAIN-SUFFIX,36kr.com,国内应用
+- DOMAIN-SUFFIX,huxiu.com,国内应用
+- DOMAIN-SUFFIX,donews.com,国内应用
+- DOMAIN-SUFFIX,zol.com.cn,国内应用
+- DOMAIN-SUFFIX,csdn.net,国内应用
+- DOMAIN-SUFFIX,cnblogs.com,国内应用
+- DOMAIN-SUFFIX,juejin.cn,国内应用
+- DOMAIN-SUFFIX,segmentfault.com,国内应用
+- DOMAIN-SUFFIX,oschina.net,国内应用
+- DOMAIN-SUFFIX,zhihu.com,国内应用
+- DOMAIN-SUFFIX,zhimg.com,国内应用
+- DOMAIN-SUFFIX,xiaohongshu.com,国内应用
+- DOMAIN-SUFFIX,xhscdn.com,国内应用
+- DOMAIN-SUFFIX,douban.com,国内应用
+- DOMAIN-SUFFIX,doubanio.com,国内应用
+- DOMAIN-SUFFIX,smzdm.com,国内应用
+- DOMAIN-SUFFIX,nga.cn,国内应用
+- DOMAIN-SUFFIX,hupu.com,国内应用
+# 国内游戏
+- DOMAIN-SUFFIX,tencentgames.com,国内应用
+- DOMAIN-SUFFIX,qqgame.com,国内应用
+- DOMAIN-SUFFIX,wegame.com.cn,国内应用
+- DOMAIN-SUFFIX,neteasegames.com,国内应用
+- DOMAIN-SUFFIX,mihoyo.com,国内应用
+- DOMAIN-SUFFIX,yuanshen.com,国内应用
+- DOMAIN-SUFFIX,bh3.com,国内应用
+- DOMAIN-SUFFIX,biligame.com,国内应用
+- DOMAIN-SUFFIX,wanmei.com,国内应用
+- DOMAIN-SUFFIX,perfectworld.com.cn,国内应用
+- DOMAIN-SUFFIX,37.com,国内应用
+- DOMAIN-SUFFIX,4399.com,国内应用
+- DOMAIN-SUFFIX,9game.cn,国内应用
+- DOMAIN-SUFFIX,duowan.com,国内应用
+- DOMAIN-SUFFIX,17173.com,国内应用
+- DOMAIN-SUFFIX,xoyo.com,国内应用
+- DOMAIN-SUFFIX,seasun.com,国内应用
+- DOMAIN-SUFFIX,shandagames.com,国内应用
+- DOMAIN-SUFFIX,shengqugames.com,国内应用
+- DOMAIN-SUFFIX,taptap.cn,国内应用
+- DOMAIN-SUFFIX,taptap.com,国内应用
+# 国内 AI
+- DOMAIN-SUFFIX,deepseek.com,国内应用
+- DOMAIN-SUFFIX,deepseek.cn,国内应用
+- DOMAIN-SUFFIX,moonshot.cn,国内应用
+- DOMAIN-SUFFIX,kimi.com,国内应用
+- DOMAIN-SUFFIX,kimi.ai,国内应用
+- DOMAIN-SUFFIX,zhipuai.cn,国内应用
+- DOMAIN-SUFFIX,chatglm.cn,国内应用
+- DOMAIN-SUFFIX,bigmodel.cn,国内应用
+- DOMAIN-SUFFIX,baichuan-ai.com,国内应用
+- DOMAIN-SUFFIX,baichuan-ai.cn,国内应用
+- DOMAIN-SUFFIX,minimax.chat,国内应用
+- DOMAIN-SUFFIX,minimaxi.com,国内应用
+- DOMAIN-SUFFIX,abab.chat,国内应用
+- DOMAIN-SUFFIX,doubao.com,国内应用
+- DOMAIN-SUFFIX,volcengine.com,国内应用
+- DOMAIN-SUFFIX,volccdn.com,国内应用
+- DOMAIN-SUFFIX,qwen.ai,国内应用
+- DOMAIN-SUFFIX,tongyi.com,国内应用
+- DOMAIN-SUFFIX,modelscope.cn,国内应用
+- DOMAIN-SUFFIX,modelscope.net,国内应用
+- DOMAIN-SUFFIX,dashscope.aliyuncs.com,国内应用
+- DOMAIN-SUFFIX,sensecore.cn,国内应用
+- DOMAIN-SUFFIX,sensetime.com,国内应用
+- DOMAIN-SUFFIX,stepfun.com,国内应用
+- DOMAIN-SUFFIX,stepfun.ai,国内应用
+- DOMAIN-SUFFIX,siliconflow.cn,国内应用
+- DOMAIN-SUFFIX,siliconflow.com,国内应用
+- DOMAIN-SUFFIX,01.ai,国内应用
+- DOMAIN-SUFFIX,lingyiwanwu.com,国内应用
+- DOMAIN-SUFFIX,tiangong.cn,国内应用
+- DOMAIN-SUFFIX,sparkdesk.com,国内应用
+- DOMAIN-SUFFIX,iflytek.com,国内应用
+- DOMAIN-SUFFIX,xfyun.cn,国内应用
+# 交通、旅行、办公与开发
+- DOMAIN-SUFFIX,12306.cn,国内应用
+- DOMAIN-SUFFIX,ctrip.com,国内应用
+- DOMAIN-SUFFIX,qunar.com,国内应用
+- DOMAIN-SUFFIX,qunarzz.com,国内应用
+- DOMAIN-SUFFIX,ly.com,国内应用
+- DOMAIN-SUFFIX,tongcheng.com,国内应用
+- DOMAIN-SUFFIX,hellobike.com,国内应用
+- DOMAIN-SUFFIX,didi.cn,国内应用
+- DOMAIN-SUFFIX,didiglobal.com,国内应用
+- DOMAIN-SUFFIX,autohome.com.cn,国内应用
+- DOMAIN-SUFFIX,che168.com,国内应用
+- DOMAIN-SUFFIX,zhaopin.com,国内应用
+- DOMAIN-SUFFIX,51job.com,国内应用
+- DOMAIN-SUFFIX,bosszhipin.com,国内应用
+- DOMAIN-SUFFIX,feishu.cn,国内应用
+- DOMAIN-SUFFIX,feishucdn.com,国内应用
+- DOMAIN-SUFFIX,dingding.com,国内应用
+- DOMAIN-SUFFIX,dingtalk.com,国内应用
+- DOMAIN-SUFFIX,teambition.com,国内应用
+- DOMAIN-SUFFIX,lanhuapp.com,国内应用
+- DOMAIN-SUFFIX,modao.cc,国内应用
+- DOMAIN-SUFFIX,gitee.com,国内应用
+- DOMAIN-SUFFIX,gitcode.com,国内应用
+- DOMAIN-SUFFIX,coding.net,国内应用
+# MetaCubeX 中国域名库：补全未显式列出的国内站点，每天更新
+- RULE-SET,国内应用域名库,国内应用
+# 中国大陆 IP 兜底
+- GEOIP,CN,国内应用
+- MATCH,淘星网
