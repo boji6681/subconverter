@@ -1,0 +1,25 @@
+# MerlinClash custom remote compact rules
+# Policy group: 淘星网
+# Rule count: 20
+# Original order is preserved from merlinclash-custom.ini.
+
+DOMAIN-SUFFIX,hkbn.net
+DOMAIN-SUFFIX,speedtest.hkbn.com.hk
+DOMAIN-SUFFIX,so-net.net.tw
+DOMAIN-SUFFIX,speed.hinet.net
+DOMAIN-SUFFIX,fast.com
+DOMAIN-SUFFIX,verizon.com
+DOMAIN-SUFFIX,testmy.net
+DOMAIN-SUFFIX,waveform.com
+DOMAIN-SUFFIX,speed.cloudflare.com
+DOMAIN-SUFFIX,radar.cloudflare.com
+DOMAIN-SUFFIX,speed.measurementlab.net
+DOMAIN-SUFFIX,speedof.me
+DOMAIN-SUFFIX,librespeed.org
+DOMAIN-SUFFIX,openspeedtest.com
+DOMAIN-SUFFIX,nperf.com
+DOMAIN-SUFFIX,meter.net
+DOMAIN-SUFFIX,speedtest.samknows.com
+DOMAIN-SUFFIX,broadbandspeedchecker.co.uk
+DOMAIN-SUFFIX,broadbandspeedtest.org.uk
+DOMAIN-SUFFIX,highspeedinternet.com

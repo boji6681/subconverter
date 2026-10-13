@@ -1,0 +1,15 @@
+# MerlinClash custom remote compact rules
+# Policy group: 游戏
+# Rule count: 10
+# Original order is preserved from merlinclash-custom.ini.
+
+DOMAIN-SUFFIX,steampowered.com
+DOMAIN-SUFFIX,steamcommunity.com
+DOMAIN-SUFFIX,steamstatic.com
+DOMAIN-SUFFIX,steamcontent.com
+DOMAIN-SUFFIX,epicgames.com
+DOMAIN-SUFFIX,battle.net
+DOMAIN-SUFFIX,blizzard.com
+DOMAIN-SUFFIX,xboxlive.com
+DOMAIN-SUFFIX,playstation.net
+DOMAIN-SUFFIX,nintendo.net

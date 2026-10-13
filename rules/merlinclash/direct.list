@@ -1,0 +1,37 @@
+# MerlinClash custom remote compact rules
+# Policy group: DIRECT
+# Rule count: 32
+# Original order is preserved from merlinclash-custom.ini.
+
+DOMAIN-SUFFIX,local
+DOMAIN-SUFFIX,lan
+IP-CIDR,127.0.0.0/8,no-resolve
+IP-CIDR,10.0.0.0/8,no-resolve
+IP-CIDR,172.16.0.0/12,no-resolve
+IP-CIDR,192.168.0.0/16,no-resolve
+IP-CIDR,169.254.0.0/16,no-resolve
+IP-CIDR6,::1/128,no-resolve
+IP-CIDR6,fc00::/7,no-resolve
+IP-CIDR6,fe80::/10,no-resolve
+IP-CIDR,23.237.231.61/32,no-resolve
+IP-CIDR,23.237.231.63/32,no-resolve
+IP-CIDR,23.237.231.64/32,no-resolve
+IP-CIDR,23.237.231.73/32,no-resolve
+IP-CIDR,23.237.231.74/32,no-resolve
+IP-CIDR,23.237.231.72/32,no-resolve
+IP-CIDR,23.237.231.71/32,no-resolve
+IP-CIDR,64.62.198.69/32,no-resolve
+IP-CIDR,64.62.198.66/32,no-resolve
+IP-CIDR,64.62.198.119/32,no-resolve
+IP-CIDR,64.62.198.109/32,no-resolve
+IP-CIDR,64.62.198.101/32,no-resolve
+IP-CIDR,64.62.198.102/32,no-resolve
+IP-CIDR,42.200.223.79/32,no-resolve
+DOMAIN-SUFFIX,speedtest.cn
+DOMAIN-SUFFIX,speedtests.cn
+DOMAIN-SUFFIX,test.ustc.edu.cn
+DOMAIN-SUFFIX,test6.nju.edu.cn
+DOMAIN-SUFFIX,speed.nju.edu.cn
+DOMAIN-SUFFIX,speed6.nju.edu.cn
+DOMAIN-SUFFIX,speedtest.sec.edu.cn
+DOMAIN-SUFFIX,speed.sc.189.cn
