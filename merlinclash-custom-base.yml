@@ -46,7 +46,8 @@ dns:
   - https://1.12.12.12/dns-query
 tun:
   enable: false
-  stack: mixed
+  # Mihomo Meta v1.14.5 accepts system/gvisor; mixed is a newer value.
+  stack: system
   auto-route: true
   auto-detect-interface: true
   dns-hijack:
@@ -58,8 +59,8 @@ rule-providers:
   国内应用域名库:
     type: http
     behavior: domain
-    format: mrs
-    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs
-    path: ./ruleset/geosite-cn.mrs
+    format: text
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.list
+    path: ./ruleset/geosite-cn.list
     interval: 86400
 rules: ~
